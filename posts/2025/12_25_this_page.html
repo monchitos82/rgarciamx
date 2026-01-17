@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" color-scheme="light dark">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="./assets/style.css">
+
+    <title>mon's blog 👾</title>
+</head>
+
+<body>
+    <div id="content">
+        <ul class="menu-bar">
+            <li class="menu-item" id="posts">
+                <a class="dropdown-btn" href="#" title="Posts">
+                    Posts
+                </a>
+                <div class="dropdown-content">
+                    <a class="dropdown-item" href="./posts/2026.html">2026</a>
+                    <a class="dropdown-item" href="./posts/2025.html">2025</a>
+                    <a class="dropdown-item" href="./posts/2024.html">2024</a>
+                </div>
+            </li>
+        </ul>
+        <br />
+    </div>
+    <h3>How this page was built (12/25)</h3>
+    <p>I started this page as a blog and I have changed it so frequently that it is hard to describe what it is, and its
+        purpose. I added a <a href="../../changelog.txt" target="blank_">changelog</a> to describe what changed within,
+        but I wanted to take the chance to write about this site itself.</p>
+    <p>The reason for this, is mostly to document a simple build pipeline with no special tools or artifacts; I mean, I
+        integrated some <em>CI/CD</em> for the sake of automation, but in reality, this whole thing really just needs a
+        script and <em>Neocities</em> to go live on every change.</p>
+    <p>I didn&rsquo;t pick any shinny tool or platform because I really enjoy the crafting process. Sometimes I write
+        these things in plain <em>HTML</em>, although it is not the most efficient way (that&rsquo;s why
+        <em>Markdown</em> is the default format).</p>
+    <p>I can say the same about other parts of this page. It used to leverage on <em>Bootstrap</em> and some
+        <em>JavaScript</em>, even some stats using <em>G4A</em> when I had it hosted at <em>Github</em> pages, but all
+        those are gone, because, I just don&rsquo;t care about adding dead weight to this page. It still uses some
+        <em>CSS</em> and templates, frankly, this site is as vanilla as it gets with modern browsers.</p>
+    <p>Behind the scenes it is not much different what happens for this page. I might take ideas from here and there,
+        especially for the robots and style files, but that&rsquo;s just me being lazy about trying weird things and
+        breaking the site. Normally, every entry starts with a new <em>Markdown</em> file getting created. From there
+        all I need to to do is the real hard part, write the post.</p>
+    <p>Once the post is ready, the publishing process just follows a few simple steps on my end: It is all about storing
+        this in a repository and let it go.</p>
+    <p>When I say &ldquo;let it go&rdquo;, I mean, the update happens, then the changes go through a very simple build
+        process in a <em>Jenkins</em> container:</p>
+    <pre>
+Repository update
+  |
+  ∟ Build HTMLs
+       |
+       ∟ Rebuild Indices
+            |
+            ∟ Async Validations (broken anchors and foul language)
+              RSS build
+                    |
+                    ∟ Publish site using its API
+                        |
+                        ∟ Cleanup
+</pre>
+
+    <p>That&rsquo;s it. Simple as it is, I enjoy doing this and connecting pieces and ideas. I used to build other
+        sections like a <em>snippets</em> one, but I decided not to dedicate a menu for it, or any other than the actual
+        posts. I am experimenting using <em>Ollama</em> calls to add descriptions to the indices, but I think the result
+        is not compelling enough to actually devote time for the models to produce an abstract, it just feels like an
+        overhead. I think this site has evolved both in what I want to show and how I want it to work. Simplicity has
+        been key for me to keep this project alive, and I think this will continue being my companion.</p>
+</body>
+
+</html>

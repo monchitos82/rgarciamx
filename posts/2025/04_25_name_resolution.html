@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en" color-scheme="light dark">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="./assets/style.css">
+
+    <title>mon's blog 👾</title>
+</head>
+
+<body>
+    <div id="content">
+        <ul class="menu-bar">
+            <li class="menu-item" id="posts">
+                <a class="dropdown-btn" href="#" title="Posts">
+                    Posts
+                </a>
+                <div class="dropdown-content">
+                    <a class="dropdown-item" href="./posts/2026.html">2026</a>
+                    <a class="dropdown-item" href="./posts/2025.html">2025</a>
+                    <a class="dropdown-item" href="./posts/2024.html">2024</a>
+                </div>
+            </li>
+        </ul>
+        <br />
+    </div>
+    <h3>What happens when you open google.com in your browser? (04/25)</h3>
+    <p>This is the first entry of what I will call: Tiny ass cheat sheet (I have a <a
+            href="../../archive/big_ass_cheat_sheet.html" target="_blank">big ass cheat sheet</a> if you&rsquo;re
+        curious), where posts aren&rsquo;t going to be tiny, not reflective of anything going on with my life, yet I am
+        trying to give some closure to some questions where either I bombed or had a <em>spirit de l&rsquo;escalier</em>
+        moments.</p>
+    <p>So what happens when you call google.com from either your browser, curl, ping? This is a common systems
+        engineering interview question, where the interviewer will try to delve into your understanding of networking,
+        protocols, name resolution and ultimately try to get off by pointing out how ignorant you are if you miss a
+        thing or two. Yes, those jerks.</p>
+    <p>So let&rsquo;s go step by step, alright? Your program will call google.com. It will create a socket
+        (<code>socket()</code>) to connect to a remote address. There are going to be several steps involved, the first
+        one will focus on name resolution, well, because you are using a name. So <code>connect()</code> will first of
+        all require an address. Your <em>OS</em> will likely go to <code>nsswitch</code> to seek where the naming info
+        is taken from, either a Berkeley <em>database</em> or a file. Normally, this is a file (<code>hosts</code>) so
+        next stop will be reading that file and -in this scenario- finding nothing, it would not stop there, but moving
+        on to where our name resolution resources are configured (<code>resolv</code>). Yes, there were already a bunch
+        of system calls already involved in the process of read and lookup, no I will not mention those, I don&rsquo;t
+        even know all of them (<code>bind()</code>, <code>listen()</code>, <code>read()</code>, <code>fstat()</code>,
+        etc), so, the next stop is asking the gateway. This will require figuring out what address is the gateway (if
+        not present in a routing table) so you&rsquo;re going to send (broadcast) an <em>ARP</em> call to your router if
+        that one is missing or if the <em>DHCP</em> has not provided you with it (which likely had). So once you call
+        your gateway (I will emcompass the &ldquo;gateway&rdquo; part as your router and <em>ISP</em> here for
+        simplicity, IRL the modem/router at home would forward the call to the <em>ISP</em> routers, <em>POPs</em> and
+        so on, and so on&hellip; <code>computer -&gt; router -&gt; isp</code>) your next call in the path of what
+        <code>sendto()</code> would try (at this point the socket creation is still in need of an address, you will try
+        resolution first), here is another call pending to be mentioned <code>getaddrinfo()</code> which we need to
+        define where is the request actually going. So let&rsquo;s talk about domain name (<em>DNS</em>) now.
+    </p>
+    <p>Your lookup made it all the way to the gateway and no name to address relation is found yet, you will care about
+        routes later, first you need an IP and that&rsquo;s where <em>DNS</em> will come into play. Chances are, your
+        first <em>DNS</em> will be that one your <em>ISP</em> provided, so if the entry for the address is cached in it,
+        you will have an address. Let&rsquo;s pretend it isn&rsquo;t what it is now? Your call will make the
+        <em>DNS</em> go and ask the root level. There are few servers in this level, all they are going to do is direct
+        the call to the next level in the lookup hierarchy: top level, that <code>.com</code> extension thingy.
+        <em>DNS</em> relies in forwarding calls in a recursive manner so the request lands where it is likely to be
+        present in a resolution table, yet most of this work is cached already, that explains why sometimes it takes
+        time (lots of it sometimes), for a change to be consistent with reality&hellip; now feels like eventual
+        consistency is not so new anymore right?
+    </p>
+    <p>So the top level (<em>TLD</em>) will search its authoritative server for the domain name
+        (<code>google.com</code>) and send the request there. Can I see this in my interface using <code>dig</code>?</p>
+    <p>Kind of, try: <code>dig +trace -4 google.com</code> and you see it. If you happen to have your own <em>Bind9
+            DNS</em> you are going to get a more thorough view. Cherry on top? Add <code>strace</code> and see the
+        syscalls by yourself.</p>
+    <p>So assuming you have an address (in this case, likely an <em>API</em> gateway or a point of presence that will
+        get you content via <em>CDN</em>), now what? And wait we were sending <em>ARP</em> broadcasts, was this part of
+        it? Nope, these calls were <em>UDP</em> calls to a known path (yes, that routing happened behind scenes and you
+        were basically talking to only one <em>DNS</em> machine), and unless the response was so large or
+        <em>DNSSEC</em> was involved or simply you used <code>-tcp</code>, the call will always use UDP.
+    </p>
+    <p>Once you have your <em>IP</em>, your <code>connect()</code> call has a place to go. Now the routing tables in the
+        network including your <em>ISP</em> will direct your packet to the machine with that address. <em>BGP</em> will
+        give devices the optimal route for your request to go, wanna see where that is going? <code>traceroute</code>
+        can help.</p>
+    <p>So what goes on after? It depends, are you using ping? (if <em>ICMP</em> is enabled) you have an echo request. If
+        on the other hand your call uses <em>HTTP</em> and <em>TLS</em>, then the call is slightly more complicated,
+        your call will be processed by an <em>HTTP</em> server. If <em>TLS</em> is enabled you will have a <em>TLS</em>
+        handshake. If the server handles more than one <em>nameserver</em>, it will need to find the appropriate
+        certificate too (<em>SNI</em>), but the dance is quite the same: <code>ClientHello</code>,
+        <code>ServerHello</code>, you had a negotiation for mechanism, supported extensions, keys exchange and start
+        data transmission. In a nutshell:
+    </p>
+    <p><code>ARP-&gt;UDP-&gt;TCP-&gt;TLS-&gt;HTTP</code></p>
+    <p>This is an imperfect way to paint it as a whole, yet it can be more complete than those infographic diagrams you
+        find at LinkedIn if you care to read through. Jerks will still find a way to tell you you&rsquo;re not good
+        enough, but now you can say, at least I tried to get it deeper.</p>
+</body>
+
+</html>

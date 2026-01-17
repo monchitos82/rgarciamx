@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en" color-scheme="light dark">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="./assets/style.css">
+
+    <title>mon's blog 👾</title>
+</head>
+
+<body>
+    <div id="content">
+        <ul class="menu-bar">
+            <li class="menu-item" id="posts">
+                <a class="dropdown-btn" href="#" title="Posts">
+                    Posts
+                </a>
+                <div class="dropdown-content">
+                    <a class="dropdown-item" href="./posts/2026.html">2026</a>
+                    <a class="dropdown-item" href="./posts/2025.html">2025</a>
+                    <a class="dropdown-item" href="./posts/2024.html">2024</a>
+                </div>
+            </li>
+        </ul>
+        <br />
+    </div>
+    <h3>Connecting my services (11/25)</h3>
+    <p>This will sound like a boring technical post, full of configurations and rants, but actually it&rsquo;s about the
+        unexpected realization that I have connected most of the projects I started independently and what each one of
+        those is teaching me.</p>
+    <p>Last year as I moved back I experimented heavily with clusters in my own infrastructure, although my
+        infrastructure is limited, I wanted to have a good setup to test products and ideas and to centrally store my
+        data. I ended up giving the remote storage idea and dismantling my cluster, but I repurposed some machines to do
+        some non-trivial tasks like block ads, do network analysis and even poll weather stats. So these machines are
+        still hiding at the corners of my place.</p>
+    <p>From the projects I created and the services I deployed, I basically built an observability stack, imperfect, but
+        it is there. I have said often that I am not a big fan of containers just because poor containerization makes
+        hard to troubleshoot services, but since I own my code, I am using the good side of containers: isolation, so I
+        can put as much as I can to run in my main box. Why? Because it is beefy enough and because I can run datastores
+        there.</p>
+    <p>So basically I ended up with a bunch of services and images generating datapoints everywhere. So out of curiosity
+        I decided to dig through them and take the chance to learn a bit more about data ingestion and processing. My
+        setup didn&rsquo;t disappoint, I had several data stores already in place and I figured out the services I had
+        could be connected through some pipelines to produce data, not useful data, because I don&rsquo;t do much with
+        it, however, this is a learning opportunity.</p>
+    <p>So I had my monitoring services inserting data into my datastores and it was not hard to extend them to produce a
+        bit more, so I instrumented them and in no time I had a full <em>OTEL</em> compliant stack. If you instrument to
+        produce to <em>Jaeger</em> you might as well just replace it for the <em>OTEL</em> collector, which I did and I
+        was able to extend to different backends. So now I know about producers, collectors and exporters, on top of all
+        I knew before about instrumentation.</p>
+    <p>Collecting data also serves me to feed data into ingestors. At this moment I don&rsquo;t write much to
+        <em>Kafka</em> to actually serialize the ingestion properly (I can do that later though), but I could connect
+        the ingestors (using <em>Flink</em>) to my read replicas of <em>PostgreSQL</em>. This served me to actually
+        learn about creating ingestors (I knew about it using <em>Samza</em>, but <em>Flink</em> is less quirky as a
+        cluster) and sinking data, which I took the chance of doing it using <em>MongoDB</em>.</p>
+    <p>Having this setup as I said, serves no purpose, I collect datapoints using <em>Prometheus</em> plugins for the
+        sake of building dashboards, but it is very useful for learning about: a) How to create scalable systems. b) How
+        to create an end to end data pipeline. c) Assess the functionality of every piece I&rsquo;ve written.</p>
+    <p>As result of this <em>toying with shinny blocks of software</em>, I ended up migrating some services to
+        <em>Golang</em>, shelving other projects, and fully embracing my <em>Podman</em> setup. It has been an
+        interesting journey that it isn&rsquo;t over, where I have had the chance to see diverse disciplines of my
+        industry. I lost the fear of meddling with some languages, I confirmed my disgust for others, I harvested a lot
+        of the power <em>LLMs</em> have to provide useful advice, I learned to ask better questions, I learned to
+        dismiss bad ideas too.</p>
+    <p>In the end I am not changing much of what I already had in place; I am discovering that my basis is solid and
+        that I could grow a lot having a bunch of great projects as foundation. This deepens my respect of open source
+        products.</p>
+    <p>I am shying away from creating a roadmap on how to do things and how to setup these projects, because their
+        purpose is to serve my needs. I can however produce a list of the many great projects I used to connect and
+        produce all the things that today compose my stack at home:</p>
+    <ul>
+        <li>Apache Airflow (poll and produce weather data, trigger and orchestrate jobs)</li>
+        <li>Git (repository for all projects, including this blog)</li>
+        <li>Jenkins (Publish this blog, validate configurations)</li>
+        <li>MariaDB (Backend for Grafana)</li>
+        <li>InfluxDB (Store network metrics)</li>
+        <li>Prometheus (Backend for all monitoring)</li>
+        <li>Jaeger (Traces analysis of my code)</li>
+        <li>Statsd (Monitoring Airflow)</li>
+        <li>Suricata (Monitoring network internally)</li>
+        <li>Pihole (Blocking tracking traffic and ads, a <strong>must</strong> in a house full of IoT)</li>
+        <li>PostgreSQL (Store for all the backends I wrote)</li>
+        <li>Apache Flink (Consumers for aggregating data from my datastores. I know, in batch Spark would be just as
+            good if not better)</li>
+        <li>MongoDB (Sink for the Flink data)</li>
+        <li>Trino (Centralized querying)</li>
+        <li>Redis/Valkey (Caching layer for some projects)</li>
+        <li>Nginx (You need a web server)</li>
+        <li>HAProxy (You need a web server, you don&rsquo;t need a <em>specific</em> one)</li>
+        <li>Grafana (Because visualization of data is golden)</li>
+        <li>ElasticSearch (Indexing my logs)</li>
+    </ul>
+    <p>I was not expecting to put this post together; it adds no value to my writing, but it is a recap of all the
+        projects I ventured into for the sake of learning and producing useful data like knowing about my network speed,
+        my energy consumption, my weather and helping this writting go live via <em>Neocities</em> 💜.</p>
+    <pre>
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                            EXTERNAL TRAFFIC                                 │
+└────────────────────────────────────┬────────────────────────────────────────┘
+                                     │
+                                     ▼
+                          ┌──────────────────┐
+                          │     HAProxy      │
+                          │  (Load Balancer) │
+                          └────────┬─────────┘
+                                   │
+                                   ▼
+                          ┌──────────────────┐
+                          │      Nginx       │
+                          │ (Config Server)  │
+                          │  - CSV files     │
+                          │  - Prom configs  │
+                          └────────┬─────────┘
+                                   │
+         ┌─────────────────────────┼──────────────────────┐
+         │                         │                      │
+         ▼                         ▼                      ▼
+┌─────────────────┐      ┌─────────────────┐      ┌─────────────────┐
+│   Prometheus    │      │    Grafana      │      │     My own      │ 
+│  (Metrics DB)   │◄─────│ (Visualization) │      │    Services     │
+│                 │      │                 │      │                 │
+└────────┬────────┘      └────────┬────────┘      └────────┬────────┘
+         │                        │                        │
+         │                        │                        ▼
+         │                        │                ┌─────────────────┐
+         │                        │                │ OTEL Collector  │
+         │                        └───────────────►│  (Telemetry)    │
+         │                                         └────────┬────────┘
+         │                                                  │
+         │                                         ┌────────┴────────┐
+         │                                         │                 │
+         ▼                                         ▼                 ▼
+┌─────────────────┐                      ┌─────────────────┐ ┌─────────────┐
+│     StatsD      │                      │     Jaeger      │ │Elasticsearch│
+│ (Airflow Stats) │                      │    (Traces)     │ │   (Logs)    │
+└─────────────────┘                      └─────────────────┘ └─────────────┘
+
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                        WORKFLOW & ORCHESTRATION                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+         ┌─────────────────┐              ┌─────────────────┐
+         │   Git Service   │──triggers───►│     Jenkins     │
+         │                 │              │  + Builder Node │
+         └─────────────────┘              └─────────────────┘
+
+                          ┌──────────────────┐
+                          │     Airflow      │
+                          │ (Orchestration)  │
+                          └────────┬─────────┘
+                                   │
+                          ┌────────┴────────┐
+                          │                 │
+                          ▼                 ▼
+                   ┌─────────────┐   ┌─────────────┐
+                   │   Valkey    │   │  Postgres   │
+                   │ (Task Queue)│   │ (Primary +  │
+                   └─────────────┘   │ Replica DB) │
+                                     └──────┬──────┘
+                                            │
+                                            │ replication
+                                            │
+                                            ▼
+                                    ┌────────────────┐
+                                    │ Postgres Data  │
+                                    │  (Services +   │
+                                    │   Airflow BE)  │
+                                    └────────┬───────┘
+                                             │
+                                             ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                      DATA PROCESSING & ANALYTICS                            │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+         ┌─────────────────┐                      ┌─────────────────┐
+         │  Flink Job      │────aggregates───────►│    MongoDB      │
+         │ (Stream Proc.)  │                      │(Aggregated Data)│
+         └─────────────────┘                      └─────────────────┘
+                  ▲
+                  │ reads from
+                  │
+         ┌────────┴────────┐
+         │    Postgres     │
+         └─────────────────┘
+
+
+         ┌─────────────────────────────────────────────────────────┐
+         │                       Trino                             │
+         │              (Federated Query Engine)                   │
+         │   Queries: Postgres, MongoDB, InfluxDB, ...             │
+         └─────────────────────────────────────────────────────────┘
+                   │          │           │            │
+           ┌───────┘          │           │            └────────┐
+           ▼       │          ▼           ▼                     ▼
+    ┌───────────┐  │   ┌──────────┐ ┌───────────┐      ┌──────────────┐
+    │  Postgres │  │   │ MongoDB  │ │ InfluxDB  │      │Elasticsearch │
+    └───────────┘  │   └──────────┘ │ (Network  │      └──────────────┘
+                   │                │Ping Stats)│
+                   │                └───────────┘
+                   │                       ▲
+                   │                       │ stores
+                   │                       │
+                   │                ┌──────┴───────┐
+                   │                │ Network Ping │
+                   │                │   Monitors   │
+                   │                └──────────────┘
+                   ▼
+         ┌─────────────────┐
+         │    MariaDB      │
+         │ (Grafana Data)  │
+         └─────────────────┘
+
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                        SHARED INFRASTRUCTURE                                │
+└─────────────────────────────────────────────────────────────────────────────┘
+         │                  │                  │                     │
+         ▼                  ▼                  ▼                     ▼
+  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐      ┌─────────────┐
+  │    CUPS     │    │     NFS     │    │  Suricata   │      │ Ollama      │
+  │  (Printing) │    │(File Share) │    │  (Network   │      │ (Local LLM) │
+  │             │    │             │    │  Monitoring)│      │             │
+  └─────────────┘    └─────────────┘    └─────────────┘      └─────────────┘
+</pre>
+
+    <p>Bonus: I tried to replicate this infra by asking Claude to get me a tutorial, I think while imperfect, the
+        results are quite interesting.<br />
+        <a href="../../snippets/otel_flask_blog.html" target="_blank" title="Read tutorial">
+            tutorial for a simple service and its observability stack
+        </a>
+    </p>
+</body>
+
+</html>

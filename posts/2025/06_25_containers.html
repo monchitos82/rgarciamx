@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en" color-scheme="light dark">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="./assets/style.css">
+
+    <title>mon's blog 👾</title>
+</head>
+
+<body>
+    <div id="content">
+        <ul class="menu-bar">
+            <li class="menu-item" id="posts">
+                <a class="dropdown-btn" href="#" title="Posts">
+                    Posts
+                </a>
+                <div class="dropdown-content">
+                    <a class="dropdown-item" href="./posts/2026.html">2026</a>
+                    <a class="dropdown-item" href="./posts/2025.html">2025</a>
+                    <a class="dropdown-item" href="./posts/2024.html">2024</a>
+                </div>
+            </li>
+        </ul>
+        <br />
+    </div>
+    <h3>Containers (06/25)</h3>
+    <p>I have to start here by saying I am no expert in containers. I have been around to watch and participate in the
+        transition from <em>VMs</em> to containers. I have used many and yet not enough of them. This entry is another
+        one of my tiny ass cheat sheet entries by the way.</p>
+    <p>Anyway, my interest in virtualization and hypervisors dates a couple decades back. I started when vmware was the
+        shit and back then I had no clue what to use it for. I recall having a client running in my budget machine and
+        never delving into what I could do with it because my understanding of <em>Linux</em> was more than limited.
+        Then I graduated college, started delving into <em>Solaris</em> and started hating to do all my work via
+        <em>putty</em> so I ended up finding a way to use virtualbox and a USB to get a terminal and an <em>IDE</em>
+        that actually felt comfortable rather than using <em>notepad++</em> and <em>putty</em> to get things done. So
+        back then all I understood about isolation were permissions and root privileges, never thought (or learned)
+        about chroot and what a good tool it was to break apart an application path, so for sure <em>cgroups</em> were
+        out of the map.</p>
+    <p>Then <em>docker</em> came along and it was pure magic, the idea of having an image where you could install, test
+        and ship your code was very exciting, specially when most of my work was done by a playbook, so having a way to
+        automate the build and a way to ship in a tested manner where no installation was required felt like a big time
+        saver. But then one wonders, what is this container actually doing and why do I still use virtualbox anyway?
+        That was a question it took me some time to answer. Articles and demos all mentioned something about borrowing
+        what is part of the kernel, but never mentioned which parts. Well, that&rsquo;s where that explanation sucks
+        because to be fair nothing is borrowed, in the simplest term, a container is just creating a partition within
+        the <em>OS</em> resources to create isolation. Had this been told just like that the concept would be super
+        simple to digest, but you know, people like to sound smart.</p>
+    <p>I think I never pulled apart from the abstraction <em>docker</em> created and what actually was going on
+        underneath until I stumbled upon a place where containers were self managed! What? You don&rsquo;t use
+        <em>docker</em> for that? It took no time to see <em>docker</em> falling out of fashion and kubernetes ramping
+        up, still, the notion of what is being <strong>used</strong> from the <em>OS</em> itself was intriguing without
+        understanding what is <code>libvirt</code>, what&rsquo;s <em>LXC</em>, what are <em>namespaces</em> and
+        <em>cgroups</em>. So let&rsquo;s try to dig into those things, shall we?</p>
+    <p>I start with <code>libvirt</code> because it is a quite useful <em>API</em> to communicate the <em>OS</em> with
+        different hypervisors, not to mention giving us tools for management of resources. This comes handy when we try
+        to understand the concept of an orchestrator, although this might feel low level, the tooling and the API we
+        have to work with hypervisors, including <em>LXC</em> is key for managing what the container platform creates. I
+        don&rsquo;t think the mentioned library has much to do (if anything) with containers, still it is worth
+        mentioning, because part of the need for containers comes from the need to communicate to parts of the kernel
+        through an API like this one.</p>
+    <p>Moving on to <em>LXC</em> and why using it paired with <code>libvirt</code> can be useful to get a similar
+        functionality to <em>Docker</em>, we need to understand what the <em>Linux</em> containers project actually is.
+        <em>LXC</em> is not really what introduced the isolation it is going to work with, but it has a nice way to
+        abstract it so we can focus on defining resources and types without delving into what components of the kernel
+        itself is leveraging to provide isolation for an application. No wonder <em>docker</em> started building around
+        it when it started. But trying to dig deeper, can we do our own container by hand?</p>
+    <p>Well, circling back to the &ldquo;self managed&rdquo; mention, yes: Isolation rather than virtualization (we
+        should always make that distinction when we talk about containers) means that we provide the mechanisms from the
+        kernel itself for an application to run without any awareness of what runs outside its restricted space. How is
+        that achieved? through a set of features from the kernel, of course: capabilities, <em>cgroups</em>,
+        <em>namespaces</em>, policies and <em>filesystem</em> isolation (chroot comes into play again).</p>
+    <p>But why or how does this work?</p>
+    <p>Let&rsquo;s think about an application that requires a certain set of libraries, directories, processes and calls
+        to run. If we already have a kernel that provides its scheduler and sys-calls, we don&rsquo;t really need to
+        worry about that layer. If we however try to use <em>PID</em> 1 for this application and limit what runs on the
+        <em>OS</em> to a given process, we need a way to let that application &ldquo;<em>believe</em>&rdquo; it is the
+        only one running. Using concepts like <em>namespaces</em> and <em>cgroups</em> that can be achieved,
+        <em>namespaces</em> will <em>tag</em> a set of resources to be used for a specific process and limit its view,
+        what the process can see, to what <em>namespaces</em> has <em>tagged</em> (in a <em>OS</em> structure point of
+        view, this includes the <em>PID</em> tree, networking, ipc, hostname, user mapping and mounting points just to
+        name some, depending on what you define using <code>unshare</code>) while <em>cgroups</em> will reserve and
+        limit the resources that are provisioned to the process (you need <code>cgroup-tools</code> to get this working
+        since you need a cgroup created using <code>cgcreate</code> and add resources using <code>cgset</code>). Is this
+        enough to contain a process? To some extent it is, however the restriction is not limiting access to sys-calls
+        and other critical parts of the <em>OS</em>, thus, the use of capabilities and <em>apparmor</em> policies are
+        needed not only to isolate a process, but to restrict it from operating beyond its own scope (we can see how
+        this one works using <code>showpcaps</code> on a <em>PID</em> and set it using <code>capsh</code>).</p>
+    <p>So is <em>docker</em> needed at all? What about <em>kubernetes</em>?</p>
+    <p>Well, <em>docker</em>, just like <em>LXC</em> abstracts and simplifies the operation with containers, just like
+        libvirt and the <em>docker</em> daemon simplify the orchestration at host level. Why is this the first time I
+        mention <em>kubernetes</em>? Because <em>kubernetes</em> is not really part of this orchestration, it lives and
+        operates on a different layer, where groups of containers (or machines) are the abstracted resources so
+        basically executing this same concept at a different scale of resources.</p>
+    <p>In my experience, all that is needed, all the &ldquo;magic&rdquo; is provided by the <em>Linux</em> kernel. We
+        are sold this as a breakthrough but this magic has been around since 2002 and widely adopted in 2008. I have
+        used &ldquo;in-house crafted&rdquo; versions of these orchestrators and containerization platforms, they worked
+        and worked quite well. Am I suggesting not using <em>docker</em> or <em>kubernetes</em>? Not at all, these
+        platforms are convenient, especially paired with cloud providers, however, they mean complexity just as using
+        AWS means complexity managing resources through a non-standard <em>API</em>, yet they are great enablers for
+        scalability when done right, and a strong implementation of what these concepts propose on resource isolation.
+    </p>
+    <p>Other parts I should mention?</p>
+    <p>Sure: <em>UFS</em>! Although not necessary, the <em>union-filesystem</em> is a layered approach where space is
+        managed with the intent to prevent copying and duplicating files across containers. This provides not only
+        access to different <em>filesystems</em> through a unified view but it allows access to parts of the container
+        like the image where files (read only) can be accessed by different containers, that&rsquo;s why it is a key
+        part of <em>docker</em>, however, it is not an exclusive approach of a layered access <em>Fylesystem</em> for
+        user spaces, <em>LXC</em> has its own implementation, however the key purpose of each is different.</p>
+    <p>And that&rsquo;s it, containers are all about local isolation. Hypervisors are a different animal, they implement
+        their own microcode, drivers and access to resources so while they can run on top of another <em>OS</em>, their
+        purpose is to provide an isolated platform for an <em>OS</em> itself. And this just took me years to understand
+        and explain.</p>
+    <p>What do I use? Well I use what suits my needs, <em>podman</em> for the time being.</p>
+</body>
+
+</html>

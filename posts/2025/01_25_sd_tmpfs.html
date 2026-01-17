@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" color-scheme="light dark">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="./assets/style.css">
+    <title>mon's blog 👾</title>
+</head>
+
+<body>
+    <div id="content">
+        <ul class="menu-bar">
+            <li class="menu-item" id="posts">
+                <a class="dropdown-btn" href="#" title="Posts">
+                    Posts
+                </a>
+                <div class="dropdown-content">
+                    <a class="dropdown-item" href="./posts/2026.html">2026</a>
+                    <a class="dropdown-item" href="./posts/2025.html">2025</a>
+                    <a class="dropdown-item" href="./posts/2024.html">2024</a>
+                </div>
+            </li>
+        </ul>
+        <br />
+    </div>
+    <h3>Saving my SDs using tmpfs (01/25)</h3>
+    <p>I won&rsquo;t delve here into <code>tmpfs</code> because I don&rsquo;t know where it started beyond what <a
+            href="https://en.wikipedia.org/wiki/Tmpfs" target="_blank"><em>wikipedia</em></a> has. However, if you ever
+        worked with a raspberry, you know <em>SD</em> card lifetime is limited and I come to find that
+        <code>tmpfs</code> has been a time and money saver since I minimized the writing to my storage by using it. Yet
+        as you may expect, this is ephemeral (since it is saving data into a block in the <em>RAM</em>) so yes, this has
+        two drawbacks actually, you lose memory for the sake of having a temporary place to write. Is it worth it? IMO
+        yes. Any permanent (and important) storage I have deferred to external drives, but external drives are slow.
+        Things like logs (which in these boards I don&rsquo;t care about), go to the <code>tmpfs</code> for sure.</p>
+    <p>So how easy is it to get this going?</p>
+    <p>Actually it is pretty simple. To the extent to say it comes out of the box, so pretty much all I needed is:</p>
+    <ol>
+        <li>Add the entry to <code>/etc/fstab</code></li>
+        <li>Add the dirs/files (this is a minor ache) that need services like <em>nginx</em> back to the
+            <em>filesystem</em> in order not to have startup failure upon restart; file:
+            <code>/etc/tmpfiles.d/var.conf</code></li>
+    </ol>
+    <p>The entries of each file are quite simple:</p>
+    <pre>
+# fstab
+# in this case, we specify we mount /var/log as tmpfs with 400MB size
+tmpfs  /var/log  tmpfs  defaults,noatime,nosuid,nodev,mode=0755,size=400M  0  0
+
+# var.conf <- this would go for any filesystem that actually is mounted
+# in this case, we specify we want a dir for nginx with owner www-data in the path
+d /var/log/nginx 0755 www-data www-data -
+</pre>
+
+    <p>And just like that, I have kept my <em>SD</em> cards alive for close to two years. Probably with a v.5 this is
+        not needed if you just use a <em>NVMe</em>, but that&rsquo;s not a cheap option when dealing with more than one
+        board.</p>
+</body>
+
+</html>
