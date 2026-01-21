@@ -44,7 +44,7 @@ I bet you are curious about the layers of the funnel, so let me share a diagram:
 
                                                                                      [------]---- Feedback analysis is done at every layer, this improves the classification
 \==========================================================================================/      through training data quality improvement and effectiveness measurement.
- \                                                                                  /     /       This can help improve implementation of signal the need for a different 
+ \                                                                                  /     /       This can help improve implementation or signal the need for a different 
   \                                     User request                               /     /        approach.
    \                                                                              /     /         All data produced here is meant to be used for retraining down the funnel.
     \----------------------------------------------------------------------------/     /
