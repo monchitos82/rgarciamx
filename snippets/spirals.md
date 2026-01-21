@@ -97,5 +97,5 @@ if __name__ == "__main__":
 
 ---
 <div align="center">
-  <a href="../../indexes/2025.md" title="Back to year's index">📖</a>
+  <a href="../../main/indexes/2025.md" title="Back to year's index">📖</a>
 </div>

@@ -1570,3 +1570,7 @@ For scaling beyond hundreds of nodes and 100k+ QPS, consider:
 
 The combination of async writes, read replicas, and realistic load testing with compiled tools ensures your observability stack can handle real-world production loads. The architecture is proven to scale, but remember: **always load test with tools that can actually generate the required throughput**. Python tools are excellent for development and complex scenarios, but compiled tools are mandatory for validating high-throughput production systems.
 
+---
+<div align="center">
+  <a href="../../main/indexes/2025.md" title="Back to year's index">📖</a>
+</div>
