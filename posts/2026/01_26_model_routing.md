@@ -81,3 +81,6 @@ I bet you are curious about the layers of the funnel, so let me share a diagram:
 So this is kind of an imperfect way to represent the funnel idea and of course it oversimplifies the whole set of concepts behind, the best part of it: I am not certain about this to be accurate, but hey, nobody does! At least I'm not pretending that I know.
 
 I am intentionally skipping on more advanced concepts (that I don't master either) like neural networks or the use of tensors and torch libraries to encode and train models because, as I said, I am no expert, and I believe that if we can't grasp on the basics, trying to blindly navigate through, what is indeed, a black box will not be of greater help. If we are stubborn and try to force the skills regardless, well, I just hope the profile being recruited no longer is just _Python_ programming, but data science, because as I said, this is not a language kind of problem (if it ever was).
+
+---
+[&#128195;](../ "Back to year's index")
