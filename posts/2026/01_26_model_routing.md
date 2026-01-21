@@ -84,5 +84,5 @@ I am intentionally skipping on more advanced concepts (that I don't master eithe
 
 ---
 <div align="center">
-[&#128195;](../indexes/2026.md "Back to year's index")
+  <a href="../indexes/2026.md" title="Back to year's index">&#128195;</a>
 </div>
