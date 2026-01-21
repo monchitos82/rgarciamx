@@ -13,4 +13,7 @@ As someone using Linux on an Asus laptop **every day** 🤮, I know how horrible
 
 Anyway, I think the year of Linux will just never come, but that has not stopped the kernel from being everywhere, in every device, in every circumstance. I think that desktop environments are never going to settle for one or the other and I think that lack of stability is terribly good for inventive, but the lack of acceptance from the end user is a price, that in my opinion, is worth paying. You will still have us the nerds using your projects, your experiments and learning to live with them. The rest, they are right to use Apple and those settling for whatever garbage Microsoft put together with their copilot era, will eventually make the jump when budget allows it, but they will unlikely move to the free option, even if it's free, because Linux price often comes in a resource far more valuable than money: Time.
 
-[&#128195;](../ "Back to year's index")
+---
+<div align="center">
+[&#128195;](../indexes/2026.md "Back to year's index")
+</div>
