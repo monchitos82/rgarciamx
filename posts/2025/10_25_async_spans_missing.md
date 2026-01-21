@@ -84,3 +84,8 @@ I found the issue, I found why this was all messed up and while the fix is simpl
 The issue was that using <code>fastapi_sqlalchemy</code> extension would add an unnecessary middleware object. This middleware is probably hijacking the session and doing the database operations isolated from the process. It sounds nice that just removing some session configuration would fix my problem, but it is not so easy, because in my unit tests, I am using <i>sqlite</i>. This creates a different kind of problem: Part of my settings are built around <i>asyncpg</i>, but my <i>Postgres</i> driver has no use for the tests. I can circumvent this problem using a synchronous setting (basically, keeping my old settings from the <i>Flask</i> project), but if I do so, my test is no longer apples to apples for the <code>log_request</code> method.
 
 Regardless, I fixed it! But my service regressed 100<i>QPS</i> 😞
+
+---
+<div align="center">
+  <a href="../../indexes/2025.md" title="Back to year's index">📖</a>
+</div>

@@ -31,3 +31,8 @@ Sure: _UFS_! Although not necessary, the _union-filesystem_ is a layered approac
 And that's it, containers are all about local isolation. Hypervisors are a different animal, they implement their own microcode, drivers and access to resources so while they can run on top of another _OS_, their purpose is to provide an isolated platform for an _OS_ itself. And this just took me years to understand and explain.
 
 What do I use? Well I use what suits my needs, _podman_ for the time being.
+
+---
+<div align="center">
+  <a href="../../indexes/2025.md" title="Back to year's index">📖</a>
+</div>

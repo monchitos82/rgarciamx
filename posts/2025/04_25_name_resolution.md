@@ -23,3 +23,8 @@ So what goes on after? It depends, are you using ping? (if _ICMP_ is enabled) yo
 `ARP->UDP->TCP->TLS->HTTP`
 
 This is an imperfect way to paint it as a whole, yet it can be more complete than those infographic diagrams you find at LinkedIn if you care to read through. Jerks will still find a way to tell you you're not good enough, but now you can say, at least I tried to get it deeper.
+
+---
+<div align="center">
+  <a href="../../indexes/2025.md" title="Back to year's index">📖</a>
+</div>

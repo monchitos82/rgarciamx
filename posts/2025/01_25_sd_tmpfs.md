@@ -22,3 +22,8 @@ d /var/log/nginx 0755 www-data www-data -
 </pre>
 
 And just like that, I have kept my _SD_ cards alive for close to two years. Probably with a v.5 this is not needed if you just use a _NVMe_, but that's not a cheap option when dealing with more than one board.
+
+---
+<div align="center">
+  <a href="../../indexes/2025.md" title="Back to year's index">📖</a>
+</div>

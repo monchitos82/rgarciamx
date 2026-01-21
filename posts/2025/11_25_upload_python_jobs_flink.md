@@ -178,3 +178,8 @@ public class PythonJobLauncher {
     }
 }
 </code></pre>
+
+---
+<div align="center">
+  <a href="../../indexes/2025.md" title="Back to year's index">📖</a>
+</div>

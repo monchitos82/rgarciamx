@@ -7,3 +7,8 @@ I find that it is super easy to get it working and I really liked it, but to be 
 I don't have many friends I can bring on the conversation and ended up asking _ChatGPT_ about this and well, it started using a lot the term _"over-engineering"_ which brought the conversation from _frameworks_ and language features completeness to more weird concepts like cloud native applications and to even harder topics like accountability and why engineering is a very condescending word in a world of do as you go.
 
 Anyway _FastAPI_ is nice, but old me thinks _go_ (particularly its tooling) is nicer, even when it has some weird traits.
+
+---
+<div align="center">
+  <a href="../../indexes/2024.md" title="Back to year's index">📖</a>
+</div>

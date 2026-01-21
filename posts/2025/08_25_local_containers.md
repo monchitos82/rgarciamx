@@ -33,3 +33,8 @@ A good set of lessons for me:
 * Always add volumes for data and prefer variables over configuration files (mind the risk that poses, well, secrets exist, right?)
 * Don't mess with _SELinux_ configurations when you're missing packages (this one broke my boot, my containers, _plymouth_ and _systemd_)
 * Backup `/etc` from time to time, sometimes it is a big pain to write configurations all over again
+
+---
+<div align="center">
+  <a href="../../indexes/2025.md" title="Back to year's index">📖</a>
+</div>

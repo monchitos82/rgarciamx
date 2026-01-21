@@ -54,3 +54,8 @@ However, these systems will come with their own inconveniences, right? Yes! We c
 **_tl;dr_ - Don't mind having a container orchestrator infrastructure when you don't need more than one instance, focus instead on configuring things properly.**
 
 I don't see the value in convoluting systems with the lame excuse of scale; most of our foundation services can handle a fair volume of traffic just fine and doing things for a scale that never comes is just foolish, but I think that's a conversation for another day.
+
+---
+<div align="center">
+  <a href="../../indexes/2025.md" title="Back to year's index">📖</a>
+</div>

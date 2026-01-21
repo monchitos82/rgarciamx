@@ -48,3 +48,8 @@ And then have <i>Android Studio</i> take care of the rest.
 In the end, I could not write a native <i>Android</i> app using an <i>LLM</i>. But it is fine, I think the complexity around <i>Java</i> or <i>Kotlin</i> is just obnoxious and creates a problem beyond the language itself. That's something I praise in <i>Go</i> regardless of what critics say, tooling feels adequate for the task.
 
 As I said before, I think <i>LLMs</i> are great intellect amplifiers, not a replacement. Knowing how to ask things and building a context around a task is no small feat. Just as forcing the analysis to stick to existing code is. Those expecting a great outcome from a prompt no matter how well thought it is, are in for a nasty surprise; this requires context awareness on the topic, the requestor needs to build a world of concepts and constraints where the knowledge of a model will make sense out of it, this by itself is a skill that needs practice and reinforcement. I think the progress in these models is tangible and while hyped, <b><i>Generative AI</i> does have the potential</b> to improve our productivity, but we cannot slack on it, we must use it as it is: a tool, just as we should use books.
+
+---
+<div align="center">
+  <a href="../../indexes/2025.md" title="Back to year's index">📖</a>
+</div>

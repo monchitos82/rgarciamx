@@ -15,3 +15,8 @@ That is the part that I had the hardest time understanding, because quantum comp
 Fascinating? Maybe, I wish my understanding was deeper so I could put this yet in a simpler explanation, but if I could summarize, it would go this way:
 
 You have entangled particles in a medium (often supercooled) that is fed signals. These particles are part of a logical gateway that will produce a result once measured. This operation is going to be repeated several times and the measurement will be aggregated into a probabilistic array where the highest probability fed into an algorithm will confirm a response. This is not super fast, it is as fast as the measuring computers get, however it is extremely parallel and that is where the advantage in front of a traditional computer lies, you can measure all paths taking you to a result, and those results in a few iterations will get a trustworthy value that otherwise would require a constant iteration, aggregation and incremental evaluation in a sequential fashion that would take a longer time to produce a similar answer.
+
+---
+<div align="center">
+  <a href="../../indexes/2025.md" title="Back to year's index">📖</a>
+</div>

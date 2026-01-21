@@ -42,5 +42,7 @@ The older I get, the more I reflect on things, not because I am wiser, but becau
 
 18. Check your facts. In this era of slop and hallucinations this is non-trivial anymore. If you tell a story, do some research work, inaccuracy in a time where tools and knowledge are at our fingertips is a destructive trait.
 
-<hr>
-<div align="center"> 🎄 </div>
+---
+<div align="center">
+  <a href="../../indexes/2025.md" title="Back to year's index">📖</a>
+</div>

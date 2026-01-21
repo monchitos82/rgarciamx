@@ -72,3 +72,8 @@ In my brief experience, incident management leads (the person who coordinated th
 What happens after this?
 
 Well, if you write a good _postmortem_ not only you helped solve a problem, you have good material for your engineering blog, a good tale for your nerd friends or a justification for your eye twitching.
+
+---
+<div align="center">
+  <a href="../../indexes/2025.md" title="Back to year's index">📖</a>
+</div>

@@ -74,3 +74,8 @@ _LLMs_ can be helpful and should be considered helpful. They cannot show you the
 <a href="../snippets/spirals.md" target="_blank" title="Read snippet">
 snippet with my solution
 </a>
+
+---
+<div align="center">
+  <a href="../../indexes/2025.md" title="Back to year's index">📖</a>
+</div>

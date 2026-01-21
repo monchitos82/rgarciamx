@@ -177,3 +177,8 @@ Bonus: I tried to replicate this infra by asking Claude to get me a tutorial, I 
 <a href="../../snippets/otel_flask_blog.html" target="_blank" title="Read tutorial">
 tutorial for a simple service and its observability stack
 </a>
+
+---
+<div align="center">
+  <a href="../../indexes/2025.md" title="Back to year's index">📖</a>
+</div>

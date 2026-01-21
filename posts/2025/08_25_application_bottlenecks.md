@@ -58,3 +58,8 @@ I think the list above could rapidly grow the more we delve into specifics, my a
 </pre>
 
 Final, and not less important advice I can share: Measure. Load testing and metric analytics are cornerstones of a good service health, not paying attention to this, will not spare you the above, but **it will save you from executing it with high urgency**.
+
+---
+<div align="center">
+  <a href="../../indexes/2025.md" title="Back to year's index">📖</a>
+</div>
