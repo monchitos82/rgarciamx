@@ -71,7 +71,7 @@ _LLMs_ can be helpful and should be considered helpful. They cannot show you the
 
 <sub>_(2025-08-12) Update: I tried this again in GPT-5, Opus, LeChat, R1, Qwen Code, Perplexity, Gemini and CoPilot, all, **no exceptions**, kept failing miserably._</sub>
 
-<a href="../snippets/spirals.md" target="_blank" title="Read snippet">
+<a href="../../snippets/spirals.md" target="_blank" title="Read snippet">
 snippet with my solution
 </a>
 
