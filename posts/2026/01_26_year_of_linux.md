@@ -1,0 +1,15 @@
+### The year of Linux will never come (01/26)
+
+
+Every year, since the past decade I keep reading the same post: "This is the year of Linux". Every time it is because either something great happened to Linux or more often, because Windows keeps degrading its quality.
+
+But in a grounded take, I think it is about time to accept there is never going to be the year of Linux -for the desktop, especially- and it is actually a good thing.
+
+Linux has forever been a battleground for projects. Not only desktop environments. And even though most of those environments are far more mature than when I started using Linux back in college, they are still full of good intentions and bad decisions, and I believe, none of those are bad things. I think however, we are ignoring a fact in the consumer mindset, most people don't really want to spend time using their computers and if they do, they want to use what others seem to enjoy... Linux is not in that list, but Apple has just perfectly filled that spot for decades.
+
+Now, I think those who claim the year of Linux is going to be... soon, are being oblivious to the fact that "the year of Linux" already happened about a decade ago and keeps repeating itself year after year. You have Android everywhere, you have Steam, you have whatever Amazon had put together and it is not stopping there, most of the cloud is Linux at this point, yes, the latter is not making sense to the Linux on the desktop, but to be fair, Linux on the desktop is working since ages, it is just the horrible, horrible mix of unnecessary features that manufacturers cram together that makes it unstable, let alone the commercial reasons behind. In any case a countless amount of people and organization have actually made the effort to put their products, especially developer focused ones, in Linux, and I come to believe that is good enough.
+
+As someone using Linux on an Asus laptop **every day** 🤮, I know how horrible is the Linux experience when you don't settle for the basics, where the OS is solid, but you need to accept the compromises and adapt to it, except most consumers would find that unacceptable, so I cannot blame them for not wanting to deal with this mess.
+
+Anyway, I think the year of Linux will just never come, but that has not stopped the kernel from being everywhere, in every device, in every circumstance. I think that desktop environments are never going to settle for one or the other and I think that lack of stability is terribly good for inventive, but the lack of acceptance from the end user is a price, that in my opinion, is worth paying. You will still have us the nerds using your projects, your experiments and learning to live with them. The rest, they are right to use Apple and those settling for whatever garbage Microsoft put together with their copilot era, will eventually make the jump when budget allows it, but they will unlikely move to the free option, even if it's free, because Linux price often comes in a resource far more valuable than money: Time.
+
