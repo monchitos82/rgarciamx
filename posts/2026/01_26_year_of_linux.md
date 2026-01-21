@@ -15,5 +15,5 @@ Anyway, I think the year of Linux will just never come, but that has not stopped
 
 ---
 <div align="center">
-  <a href="../indexes/2026.md" title="Back to year's index">&#128195;</a>
+  <a href="../../indexes/2026.md" title="Back to year's index">&#128195;</a>
 </div>
