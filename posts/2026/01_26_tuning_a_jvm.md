@@ -22,7 +22,7 @@ This works for the allocation, but it creates pressure because, well, there are 
 
 #### Attempt 2
 
-After increasing the heap, I noticed allocation only requires _~5GB_ of space, so I find no need to change the heap size, I think the region size is proper, I cannot see how many humongous objects I had or have at this point, but seeing no full garbage collection events, I believe the answer is none. So time to do something about frequency and reservation:
+After increasing the heap, I noticed allocation only requires _~5 GB_ of space, so I find no need to change the heap size, I think the region size is proper, I cannot see how many humongous objects I had or have at this point, but seeing no full garbage collection events, I believe the answer is none. So time to do something about frequency and reservation:
 
 `-Xms6G -Xmx6G -XX:ParallelGCThreads=8 -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1NewSizePercent=15 -XX:G1ReservePercent=15 -XX:MaxGCPauseMillis=120 -XX:G1HeapRegionSize=8M`
 
