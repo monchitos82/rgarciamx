@@ -2,7 +2,7 @@
 
 I had no idea on what I wanted to write in this post, or even if I wanted to write it. After all, this is just me experimenting with a Java program. However, I think it is fun for the sake of learning and for me, the benefit was giving a break to my computer fans because they get quite active when I run some games.
 
-Well, since I like to play Minecraft from time to time, I had to open the launcher and figure out how to mess with the JVM (no bedrock for me since I use Linux).
+Well, since I like to play Minecraft from time to time, I had to open the launcher and figure out how to mess with the _JVM_ (no bedrock for me since I use Linux).
 
 To my surprise, I found that the launcher default settings are quite modest in some parts and quite eager in other:
 
@@ -22,7 +22,7 @@ This works for the allocation, but it creates pressure because, well, there are 
 
 #### Attempt 2
 
-After increasing the heap, I noticed allocation only requires ~5GB of space, so I find no need to change the heap size, I think the region size is proper, I cannot see how many humongous objects I had or have at this point, but seeing no full garbage collection events, I believe the answer is none. So time to do something about frequency and reservation:
+After increasing the heap, I noticed allocation only requires _~5GB_ of space, so I find no need to change the heap size, I think the region size is proper, I cannot see how many humongous objects I had or have at this point, but seeing no full garbage collection events, I believe the answer is none. So time to do something about frequency and reservation:
 
 `-Xms6G -Xmx6G -XX:ParallelGCThreads=8 -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1NewSizePercent=15 -XX:G1ReservePercent=15 -XX:MaxGCPauseMillis=120 -XX:G1HeapRegionSize=8M`
 
