@@ -40,6 +40,10 @@ I felt like something was missing, so I thought: "hey, there's a zero code _OTEL
 
 `-Xms6G -Xmx6G -XX:+UseZGC -XX:+AlwaysPreTouch -XX:+ZGenerational -XX:+PrintGCDetails -Xlog:gc:file=gc.log -javaagent:.minecraft/opentelemetry-javaagent.jar -Dotel.service.name=minecraft -Dotel.exporter.otlp.endpoint=http://localhost:4317 -Dotel.metrics.exporter=otlp -Dotel.exporter.otlp.protocol=grpc -Dotel.javaagent.logging=application`
 
-At this point my experiment became something else, but well, I had the _OTEL_ agent so I emitted metrics to _Prometheus_ through my collector and while I observed some improvement in allocation rate and overall memory usage being down by _~1 GB_ (still pending adding those metrics to a dashboard), I also noticed more _GC_ activity, but well, I had some overhead to account for. So I believe that the attempt 2 for my case was the sweet spot.
+At this point my experiment became something else, but well, I had the _OTEL_ agent so I emitted metrics to _Prometheus_ through my collector and while I observed some improvement in allocation rate and overall memory usage being down by _~1 GB_ (still had pending adding those metrics to a dashboard), I also noticed more _GC_ activity, but well, I had some overhead to account for. So I believe that the attempt 2 for my case was the sweet spot.
+
+Probably the mentioned dashboard proves me right...
+
+![Minecraft GC Dashboard](../../images/minecraft_grafana.png)
 
 I may continue playing with this before I go back to actually playing the game, but for now I have to say that this was a fun experiment to do. Unlike in previous exercises, I used _Claude_ to do some analysis on the results and it is undeniable that it is very useful, but the decisions on where to take the _JVM_ were all mine.
