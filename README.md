@@ -1,6 +1,9 @@
 ## Ramon Garcia's blog
 
-Thanks for stopping by, I know this is not very conventional, but hey, free hosting and you get to see my mess of a writing process! Anyway, you may notice I am a highly opinionated technology enthusiast trying to explore different ideas and trends. Feel like getting in touch? Drop me a message.
+Thanks for stopping by, I know this format is not very conventional, but hey, free hosting and you get to see my mess of a writing process!
+Anyway, this is my blog, I am a highly opinionated technology enthusiast trying to explore different ideas and trends.
+
+Feel like getting in touch? Drop me a message.
 
 ---
 
