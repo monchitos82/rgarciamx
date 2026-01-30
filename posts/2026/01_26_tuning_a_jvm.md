@@ -1,8 +1,8 @@
 ### Tuning a JVM and observing it using your local stack (01/26)
 
-I had no idea on what I wanted to write in this post, or even if I wanted to write it. After all, this is just me experimenting with a Java program. However, I think it is fun for the sake of learning and for me, the benefit was giving a break to my computer fans because they get quite active when I run some games.
+I had no idea on what I wanted to write in this post, or even if I wanted to write it. After all, this is just me experimenting with a _Java_ program. However, I think it is fun for the sake of learning and for me, the benefit was giving a break to my computer fans because they get quite active when I run some games.
 
-Well, since I like to play Minecraft from time to time, I had to open the launcher and figure out how to mess with the _JVM_ (no bedrock for me since I use Linux).
+Well, since I like to play _Minecraft_ from time to time, I had to open the launcher and figure out how to mess with the _JVM_ (no _Bedrock_ for me since I use _Linux_).
 
 To my surprise, I found that the launcher default settings are quite modest in some parts and quite eager in other:
 
@@ -28,7 +28,7 @@ After increasing the heap, I noticed allocation only requires _~5 GB_ of space, 
 
 In this attempt I specified the `GCThreads` flag although it's unnecessary, the ergonomics were appropriate and having 8 cores in my machine, this just means verbosity. For the reservations, cutting to _900 MB_ (or the equivalent of using _300 MB_ with the previous heap) seems better suited for the work the collector is supposed to do, and the results confirm these decisions, the collection events are about 7 per minute. The extension in the pause threshold also helps greatly, now the collector has time to complete and the pauses are not that extensive anyway. At this point, the allocation moved from an initial _11.8 GB/min_ to _8.1 GB/min_.
 
-At this point I was quite happy with the results, the fans were less busy and playing felt smooth at _70 FPS_ (I don't like higher rates, I get dizzy). So just to satisfy my curiosity, I wanted to check if _ZGC_ would do a better job.
+At this point I was quite happy with the results, the fans were less busy and playing felt smooth at _~70 FPS_ (I don't like higher rates, I get dizzy). So just to satisfy my curiosity, I wanted to check if _ZGC_ would do a better job.
 
 #### Attempt 3
 
@@ -40,7 +40,7 @@ I felt like something was missing, so I thought: "hey, there's a zero code _OTEL
 
 `-Xms6G -Xmx6G -XX:+UseZGC -XX:+AlwaysPreTouch -XX:+ZGenerational -XX:+PrintGCDetails -Xlog:gc:file=gc.log -javaagent:.minecraft/opentelemetry-javaagent.jar -Dotel.service.name=minecraft -Dotel.exporter.otlp.endpoint=http://localhost:4317 -Dotel.metrics.exporter=otlp -Dotel.exporter.otlp.protocol=grpc -Dotel.javaagent.logging=application`
 
-At this point my experiment became something else, but well, I had the _OTEL_ agent so I emitted metrics to _Prometheus_ through my collector and while I observed some improvement in allocation rate and overall memory usage being down by _~1 GB_ (still had pending adding those metrics to a dashboard), I also noticed more _GC_ activity, but well, I had some overhead to account for. So I believe that the attempt 2 for my case was the sweet spot.
+At this point my experiment became something else, but well, I had the _OTEL_ agent running, so I emitted metrics to _Prometheus_ through my collector and while I observed some improvement in allocation rate and overall memory usage being down by _~1 GB_ (still had pending adding those metrics to a dashboard), I also noticed more _GC_ activity, so the fans were spinning again. But well, I had some overhead to account for. So I believe that the attempt 2 for my case was the sweet spot.
 
 Probably the mentioned dashboard proves me right...
 
