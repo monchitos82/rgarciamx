@@ -6,7 +6,7 @@ A _postmortem_ goes beyond trying to find the ugly truth and following a templat
 
 So why are _postmortems_ hard anyway? Where is the process turning into something difficult?
 
-_Postmortems_ are a blameless process (or they should be). Keeping it that way is a titanic effort. Nobody likes to hear their work is dogshit and their sloppiness causes an outage, disregard, those things happen and the process of figuring out what happened in detail, when done right, brings out all the dirt from under the rug and sometimes, it gets ugly.
+_Postmortems_ are a blameless process (or they should be). Keeping it that way is a titanic effort. Nobody likes to hear their work is dogshit and their sloppiness causes an outage, regardless, those things happen and the process of figuring out what happened in detail, when done right, brings out all the dirt from under the rug and sometimes, it gets ugly.
 
 _Postmortems_ require a fair amount of effort, both because they require focus, and they require to do an investigation fast. It serves no good to schedule a _postmortem_ meeting a month after an incident happened, by then the world has moved on. So, whoever oversees gathering people needs to do both: a thorough investigation and organize a meeting with a similar sense of urgency to what it took to solve an incident that triggered a _postmortem_.
 
